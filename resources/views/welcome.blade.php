@@ -134,11 +134,14 @@
                 <div class="sl-nav">
                     Language
                     <ul>
-                    <li><b>English</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <li><b> {{ Config::get('languages')[App::getLocale()] }}</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
                         <div class="triangle"></div>
                         <ul>
-                        <li><i class="sl-flag flag-usa"><div id="germany"></div></i> <span>Englisch</span></li>
-                        <li><i class="sl-flag flag-de"><div id="germany"></div></i> <span class="active">Nepali</span></li>
+                        @foreach (Config::get('languages') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li> <a href="{{ route('lang.switch', $lang) }}"><div id="germany"></div><span>{{$language}}</span></a></li>
+                            @endif
+                        @endforeach
                         </ul>
                     </li>
                     </ul>
